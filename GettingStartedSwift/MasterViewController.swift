@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Moltin
 
 class MasterViewController: UITableViewController {
 
@@ -25,6 +26,20 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        Moltin.sharedInstance().setPublicId("umRG34nxZVGIuCSPfYf8biBSvtABgTR8GMUtflyE")
+        
+        Moltin.sharedInstance().product.listingWithParameters(nil, success: { (response) -> Void in
+            // The array of products is at the "result" key
+            self.objects = response["result"]! as! [AnyObject]
+            
+            // Reload the table view that'll be used to display the products...
+            self.tableView.reloadData()
+            
+        }, failure: { (response, error) -> Void in
+            print("Something went wrong! \(error)")
+        })
+        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -70,8 +85,10 @@ class MasterViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[indexPath.row] as! [String: AnyObject]
+        
+        cell.textLabel!.text = object["title"] as? String
+        
         return cell
     }
 

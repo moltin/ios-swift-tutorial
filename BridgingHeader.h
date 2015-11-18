@@ -9,5 +9,6 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
+#import <Moltin/Moltin.h>
 
 #endif /* BridgingHeader_h */
