@@ -71,6 +71,9 @@
                                     <constraint firstAttribute="height" constant="35" id="H34-ah-Yy8"/>
                                 </constraints>
                                 <state key="normal" title="Add to cart!"/>
+                                <connections>
+                                    <action selector="addToCart:" destination="JEX-9P-axG" eventType="touchDown" id="3hQ-8t-PTi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>

@@ -27,13 +27,21 @@ class DetailViewController: UIViewController {
         // Update the user interface for the detail item.
         if let detail = self.detailItem as? NSDictionary {
             // Set the item title from the detailItem dictionary's 'title' key
-            titleLabel.text = detail["string"] as? String
+            if let title = detail.valueForKey("title") as? String {
+                titleLabel?.text = title
+                self.title = titleLabel?.text
+            }
+
             
             // Set the formatted price with tax by looking at the key path in the detailItem dictionary
-            priceLabel.text = detail.valueForKeyPath("price.data.formatted.with_tax") as? String
+            if let price = detail.valueForKeyPath("price.data.formatted.with_tax") as? String {
+                priceLabel?.text = price
+            }
             
             // Set the item description from the detailItem dictionary's 'description' key
-            descriptionLabel.text = detail["description"] as? String
+            if let description = detail.valueForKey("description") as? String {
+                descriptionLabel?.text = description
+            }
             
         }
     }
